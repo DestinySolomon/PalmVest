@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PalmVest - Agricultural Investment</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+        }
+        
+        .navbar {
+            padding: 1rem 0;
+        }
+        
+        .navbar-brand {
+            font-weight: bold;
+            font-size: 1.8rem;
+            margin-right: 0;
+        }
+        
+        .navbar-nav {
+            margin: 0 auto;
+        }
+        
+        .navbar-nav .nav-link {
+            margin: 0 15px;
+            font-weight: 500;
+        }
+        
+        .user-icon {
+            font-size: 1.5rem;
+            color: #333;
+        }
+        
+        .hero-section {
+            background: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)), 
+                        url('assets/hero-page.jpg');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 120px 0;
+            text-align: center;
+        }
+        
+        .hero-title {
+            font-size: 3rem;
+            font-weight: bold;
+            margin-bottom: 1.5rem;
+        }
+        
+        .hero-subtitle {
+            font-size: 1.2rem;
+            margin-bottom: 2.5rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.6;
+        }
+        
+        .btn-primary {
+            background-color: #28a745;
+            border-color: #28a745;
+            padding: 12px 30px;
+            font-weight: bold;
+            margin: 0 10px;
+        }
+        
+        .btn-outline-light {
+            padding: 12px 30px;
+            font-weight: bold;
+            margin: 0 10px;
+        }
+        
+        @media (max-width: 768px) {
+            .navbar-nav {
+                margin: 1rem 0;
+            }
+            
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .btn-primary, .btn-outline-light {
+                display: block;
+                width: 80%;
+                margin: 10px auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white">
+        <div class="container">
+            <!-- Logo on the left -->
+            <a class="navbar-brand" href="#">PalmVest</a>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <!-- Menu items in the center -->
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Services</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Portfolio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Contact</a>
+                    </li>
+                </ul>
+                
+                <!-- User icon on the right -->
+                <div class="d-flex">
+                    <a href="#" class="user-icon">
+                        <i class="bi bi-person"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="container">
+            <h1 class="hero-title">Agricultural Investment</h1>
+            <p class="hero-subtitle">Invest in the future of agriculture. Buy virtual palm oil, stake for guaranteed returns, and earn ROI in as little as 30 days. Sustainable investing made simple.</p>
+            <div class="hero-buttons">
+                <a href="#" class="btn btn-primary btn-lg">Start Investing Today</a>
+                <a href="#" class="btn btn-outline-light btn-lg">Learn How It Works</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
