@@ -1,152 +1,449 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>PalmVest - Agricultural Investment</title>
     <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
     <!-- Bootstrap Icons -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
-    <style>
-        body {
-            font-family: 'Arial', sans-serif;
-        }
-        
-        .navbar {
-            padding: 1rem 0;
-        }
-        
-        .navbar-brand {
-            font-weight: bold;
-            font-size: 1.8rem;
-            margin-right: 0;
-        }
-        
-        .navbar-nav {
-            margin: 0 auto;
-        }
-        
-        .navbar-nav .nav-link {
-            margin: 0 15px;
-            font-weight: 500;
-        }
-        
-        .user-icon {
-            font-size: 1.5rem;
-            color: #333;
-        }
-        
-        .hero-section {
-            background: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)), 
-                        url('assets/hero-page.jpg');
-            background-size: cover;
-            background-position: center;
-            color: white;
-            padding: 120px 0;
-            text-align: center;
-        }
-        
-        .hero-title {
-            font-size: 3rem;
-            font-weight: bold;
-            margin-bottom: 1.5rem;
-        }
-        
-        .hero-subtitle {
-            font-size: 1.2rem;
-            margin-bottom: 2.5rem;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-            line-height: 1.6;
-        }
-        
-        .btn-primary {
-            background-color: #28a745;
-            border-color: #28a745;
-            padding: 12px 30px;
-            font-weight: bold;
-            margin: 0 10px;
-        }
-        
-        .btn-outline-light {
-            padding: 12px 30px;
-            font-weight: bold;
-            margin: 0 10px;
-        }
-        
-        @media (max-width: 768px) {
-            .navbar-nav {
-                margin: 1rem 0;
-            }
-            
-            .hero-title {
-                font-size: 2.5rem;
-            }
-            
-            .btn-primary, .btn-outline-light {
-                display: block;
-                width: 80%;
-                margin: 10px auto;
-            }
-        }
-    </style>
-</head>
-<body>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css"
+    />
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-light bg-white">
-        <div class="container">
-            <!-- Logo on the left -->
-            <a class="navbar-brand" href="#">PalmVest</a>
-            
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <!-- Menu items in the center -->
-                <ul class="navbar-nav mx-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Services</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">About</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Portfolio</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Contact</a>
-                    </li>
-                </ul>
-                
-                <!-- User icon on the right -->
-                <div class="d-flex">
-                    <a href="#" class="user-icon">
-                        <i class="bi bi-person"></i>
-                    </a>
-                </div>
-            </div>
+      <div class="container">
+        <!-- Logo on the left -->
+        <a class="navbar-brand" href="#">PalmVest</a>
+
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <!-- Menu items in the center -->
+          <ul class="navbar-nav mx-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="#">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Services</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">About</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Portfolio</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Contact</a>
+            </li>
+          </ul>
+
+          <!-- User icon on the right -->
+          <div class="d-flex">
+            <a
+              href="#"
+              class="user-icon"
+              data-bs-toggle="modal"
+              data-bs-target="#authModal"
+            >
+              <i class="bi bi-person"></i>
+            </a>
+          </div>
         </div>
+      </div>
     </nav>
 
     <!-- Hero Section -->
     <section class="hero-section">
-        <div class="container">
-            <h1 class="hero-title">Agricultural Investment</h1>
-            <p class="hero-subtitle">Invest in the future of agriculture. Buy virtual palm oil, stake for guaranteed returns, and earn ROI in as little as 30 days. Sustainable investing made simple.</p>
-            <div class="hero-buttons">
-                <a href="#" class="btn btn-primary btn-lg">Start Investing Today</a>
-                <a href="#" class="btn btn-outline-light btn-lg">Learn How It Works</a>
+      <div class="container">
+        <h1 class="hero-title">Agricultural Investment</h1>
+        <p class="hero-subtitle">
+          Invest in the future of agriculture. Buy virtual palm oil, stake for
+          guaranteed returns, and earn ROI in as little as 30 days. Sustainable
+          investing made simple.
+        </p>
+        <div class="hero-buttons">
+          <a href="#" class="btn btn-primary-custom btn-lg"
+            >Start Investing Today</a
+          >
+          <a href="#" class="btn btn-outline-light btn-lg"
+            >Learn How It Works</a
+          >
+        </div>
+      </div>
+    </section>
+
+    <!-- Authentication Modal -->
+    <div
+      class="modal fade"
+      id="authModal"
+      tabindex="-1"
+      aria-labelledby="authModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body text-center">
+            <div class="welcome-icon">
+              <i class="bi bi-person-circle"></i>
+            </div>
+            <h3 class="welcome-title">Welcome to PalmVest</h3>
+            <p class="welcome-text">
+              Join our community of agricultural investors and start growing
+              your wealth sustainably. Sign up to begin your investment journey
+              or log in to access your account.
+            </p>
+
+            <div class="auth-buttons">
+              <a href="login.html" class="btn login-btn auth-btn btn-lg"
+                >Login</a
+              >
+              <a href="signup.html" class="btn signup-btn auth-btn btn-lg"
+                >Sign Up</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+       <!-- How PalmVest Works Section -->
+    <section class="works-section">
+        <div class="section-header">
+            <h1 class="section-title">How PalmVest Works</h1>
+            <p class="section-subtitle">Simple, secure, and profitable agricultural investing through our innovative virtual palm oil platform.</p>
+        </div>
+        
+        <div class="row g-4">
+            <!-- Virtual Palm Oil Investment -->
+            <div class="col-md-6 col-lg-3">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="bi bi-droplet"></i>
+                    </div>
+                    <h3 class="feature-title">Virtual Palm Oil Investment</h3>
+                    <p class="feature-description">Purchase virtual palm oil units and watch your investment grow through our secure staking platform.</p>
+                    <ul class="feature-list">
+                        <li>Minimum investment from $100</li>
+                        <li>Instant virtual delivery</li>
+                        <li>Transparent pricing</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Automated Staking -->
+            <div class="col-md-6 col-lg-3">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="bi bi-arrow-repeat"></i>
+                    </div>
+                    <h3 class="feature-title">Automated Staking</h3>
+                    <p class="feature-description">Stake your virtual palm oil for 30, 60, or 90 days with guaranteed returns and automatic rewards.</p>
+                    <ul class="feature-list">
+                        <li>30-day minimum staking</li>
+                        <li>Automatic reward distribution</li>
+                        <li>Flexible staking periods</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Guaranteed ROI -->
+            <div class="col-md-6 col-lg-3">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="bi bi-graph-up-arrow"></i>
+                    </div>
+                    <h3 class="feature-title">Guaranteed ROI</h3>
+                    <p class="feature-description">Earn competitive returns on your agricultural investments with our proven palm oil market expertise.</p>
+                    <ul class="feature-list">
+                        <li>Up to 15% monthly returns</li>
+                        <li>Risk-managed investments</li>
+                        <li>Performance tracking</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Secure Platform -->
+            <div class="col-md-6 col-lg-3">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="bi bi-shield-check"></i>
+                    </div>
+                    <h3 class="feature-title">Secure Platform</h3>
+                    <p class="feature-description">Your investments are protected with bank-level security and transparent transaction tracking.</p>
+                    <ul class="feature-list">
+                        <li>SSL encryption</li>
+                        <li>Real-time monitoring</li>
+                        <li>24/7 security support</li>
+                    </ul>
+                </div>
             </div>
         </div>
     </section>
 
+
+
+      <!-- Investment Process Section -->
+    <section class="process-section">
+        <div class="process-content">
+            <!-- Text Content (Left Side) -->
+            <div class="text-content">
+                <h2 class="process-title">Investment Process</h2>
+                
+                <!-- Step 1 -->
+                <div class="process-step">
+                    <div class="step-number">1</div>
+                    <h3 class="step-title">Deposit and Purchase</h3>
+                    <p class="step-description">Deposit money and buy virtual palm oil units from verified sellers.</p>
+                </div>
+                
+                <!-- Step 2 -->
+                <div class="process-step">
+                    <div class="step-number">2</div>
+                    <h3 class="step-title">Automatic Staking</h3>
+                    <p class="step-description">Your virtual palm oil is automatically staked for 30 days.</p>
+                </div>
+                
+                <!-- Step 3 -->
+                <div class="process-step">
+                    <div class="step-number">3</div>
+                    <h3 class="step-title">Earn Rewards</h3>
+                    <p class="step-description">Receive guaranteed ROI automatically after the staking period ends.</p>
+                </div>
+            </div>
+            
+            <!-- Image Content (Right Side) -->
+            <div class="image-content">
+                <img src="assets/Screenshot-phone-background.png" 
+                     alt="Palm Oil Investment Process" 
+                     class="process-image">
+            </div>
+        </div>
+    </section>
+
+
+
+      <!-- About PalmVest Section -->
+    <section class="about-section">
+        <div class="about-content">
+            <!-- Text Content (Left Side) -->
+            <div class="text-content">
+                <h1 class="about-title">About PalmVest</h1>
+                <p class="about-description">
+                    PalmVest revolutionizes agricultural investment by making palm oil trading accessible to everyone. Our innovative platform allows you to invest in virtual palm oil units, stake them for guaranteed returns, and earn competitive ROI without the complexities of traditional commodity trading.
+                </p>
+                <p class="about-description">
+                    With our automated staking system, your investments work for you 24/7. Simply deposit, purchase virtual palm oil from verified sellers, and watch your returns grow over 30, 60, or 90-day periods.
+                </p>
+                
+                <ul class="features-list">
+                    <li>SEC-compliant investment platform</li>
+                    <li>Verified palm oil sellers network</li>
+                    <li>Automated reward distribution</li>
+                    <li>Real-time investment tracking</li>
+                </ul>
+            </div>
+            
+            <!-- Image Content (Right Side) -->
+            <div class="image-content">
+                <img src="assets/invest-bg.jpg" 
+                     alt="PalmVest Platform" 
+                     class="about-image">
+            </div>
+        </div>
+        
+        <!-- Divider -->
+        <div class="divider"></div>
+        
+        <!-- Stats Section (Bottom) -->
+        <div class="stats-section">
+            <div class="stat-item">
+                <div class="stat-number">10,000+</div>
+                <div class="stat-label">Active Investors</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">$50M+</div>
+                <div class="stat-label">Total Investments</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">15%</div>
+                <div class="stat-label">Average Monthly ROI</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">99.9%</div>
+                <div class="stat-label">Platform Uptime</div>
+            </div>
+        </div>
+    </section>
+
+
+
+      <!-- Investment Opportunities Section -->
+    <section class="opportunities-section">
+        <div class="section-header">
+            <h1 class="section-title">Investment Opportunities</h1>
+            <p class="section-subtitle">Choose your investment quantity from 1 to 11 rubbers of premium palm oil. All investments have a fixed 30-day staking period with guaranteed 12% ROI.</p>
+        </div>
+        
+        <div class="divider"></div>
+        
+        <div class="cards-container">
+            <!-- 1 Rubber Card -->
+            <div class="investment-card">
+                <img src="assets/one-rubb.png" 
+                     alt="1 Rubber of Palm Oil" 
+                     class="card-image">
+                <div class="card-content">
+                    <span class="availability-badge available">Available</span>
+                    <h3 class="card-title">1 Rubber of Palm Oil</h3>
+                    <p class="card-subtitle">Perfect starter investment for new investors</p>
+                    
+                    <table class="investment-details">
+                        <tr>
+                            <td>Quantity</td>
+                            <td>1 Rubber</td>
+                        </tr>
+                        <tr>
+                            <td>Investment Amount</td>
+                            <td>$45,000</td>
+                        </tr>
+                        <tr>
+                            <td>Expected ROI</td>
+                            <td>12%</td>
+                        </tr>
+                        <tr>
+                            <td>Staking Period</td>
+                            <td>30 days</td>
+                        </tr>
+                    </table>
+                    
+                    <button class="btn invest-btn">Invest Now</button>
+                </div>
+            </div>
+            
+            <!-- 3 Rubbers Card -->
+            <div class="investment-card">
+                <img src="assets/three-rubbers.png" 
+                     alt="3 Rubbers of Palm Oil" 
+                     class="card-image">
+                <div class="card-content">
+                    <span class="availability-badge available">Available</span>
+                    <h3 class="card-title">3 Rubbers of Palm Oil</h3>
+                    <p class="card-subtitle">Popular choice for medium-scale investors</p>
+                    
+                    <table class="investment-details">
+                        <tr>
+                            <td>Quantity</td>
+                            <td>3 Rubbers</td>
+                        </tr>
+                        <tr>
+                            <td>Investment Amount</td>
+                            <td>$135,000</td>
+                        </tr>
+                        <tr>
+                            <td>Expected ROI</td>
+                            <td>12%</td>
+                        </tr>
+                        <tr>
+                            <td>Staking Period</td>
+                            <td>30 days</td>
+                        </tr>
+                    </table>
+                    
+                    <button class="btn invest-btn">Invest Now</button>
+                </div>
+            </div>
+            
+            <!-- 7 Rubbers Card -->
+            <div class="investment-card">
+                <img src="assets/seven-rubbers.png" 
+                     alt="7 Rubbers of Palm Oil" 
+                     class="card-image">
+                <div class="card-content">
+                    <span class="availability-badge available">Available</span>
+                    <h3 class="card-title">7 Rubbers of Palm Oil</h3>
+                    <p class="card-subtitle">Ideal for serious investors seeking higher returns</p>
+                    
+                    <table class="investment-details">
+                        <tr>
+                            <td>Quantity</td>
+                            <td>7 Rubbers</td>
+                        </tr>
+                        <tr>
+                            <td>Investment Amount</td>
+                            <td>$315,000</td>
+                        </tr>
+                        <tr>
+                            <td>Expected ROI</td>
+                            <td>12%</td>
+                        </tr>
+                        <tr>
+                            <td>Staking Period</td>
+                            <td>30 days</td>
+                        </tr>
+                    </table>
+                    
+                    <button class="btn invest-btn">Invest Now</button>
+                </div>
+            </div>
+            
+            <!-- 11 Rubbers Card -->
+            <div class="investment-card">
+                <img src="assets/eleven-rubbers.png" 
+                     alt="11 Rubbers of Palm Oil" 
+                     class="card-image">
+                <div class="card-content">
+                    <span class="availability-badge limited">Limited</span>
+                    <h3 class="card-title">11 Rubbers of Palm Oil</h3>
+                    <p class="card-subtitle">Maximum investment package for institutional investors</p>
+                    
+                    <table class="investment-details">
+                        <tr>
+                            <td>Quantity</td>
+                            <td>11 Rubbers</td>
+                        </tr>
+                        <tr>
+                            <td>Investment Amount</td>
+                            <td>$500,000</td>
+                        </tr>
+                        <tr>
+                            <td>Expected ROI</td>
+                            <td>12%</td>
+                        </tr>
+                        <tr>
+                            <td>Staking Period</td>
+                            <td>30 days</td>
+                        </tr>
+                    </table>
+                    
+                    <button class="btn invest-btn">Invest Now</button>
+                </div>
+            </div>
+        </div>
+    </section>
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-</body>
+  </body>
 </html>
