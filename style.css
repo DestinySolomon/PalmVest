@@ -23,6 +23,10 @@ body {
     font-size: 1.8rem;
     margin-right: 0;
     color: var(--primary-color) !important;
+  font-family: "Charm", cursive;
+  font-weight: 700;
+  font-style: normal;
+
 }
 
 .navbar-nav {
@@ -293,6 +297,11 @@ body {
     font-weight: 700;
     color: var(--primary-color);
     margin-bottom: 1.5rem;
+}
+.palm-style {
+    font-family: "Charm", cursive;
+    font-weight: 700;
+    font-style: normal;
 }
 
 .about-description {
@@ -681,5 +690,513 @@ body {
             
             .card-content {
                 padding: 1rem;
+            }
+        }
+
+
+        /* Testimonials Section */
+        
+        .testimonials-section {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+        
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #1b5e20;
+            margin-bottom: 1rem;
+        }
+        
+        .section-subtitle {
+            font-size: 1.2rem;
+            color: #666;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+        
+        .divider {
+            height: 2px;
+            background-color: #e0e0e0;
+            margin: 3rem 0;
+        }
+        
+        .testimonials-container {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            align-items: stretch;
+        }
+        
+        .testimonial-card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            padding: 2rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+        
+        .testimonial-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+        }
+        
+        .client-info {
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .client-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin: 0 auto 1rem;
+            border: 3px solid #e8f5e9;
+        }
+        
+        .client-name {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #1b5e20;
+            margin-bottom: 0.3rem;
+        }
+        
+        .client-role {
+            font-size: 0.9rem;
+            color: #666;
+            font-weight: 500;
+        }
+        
+        .testimonial-text {
+            font-size: 1rem;
+            color: #555;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+            font-style: italic;
+            flex-grow: 1;
+        }
+        
+        .investment-details {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 1rem;
+            border-left: 4px solid #2e7d32;
+        }
+        
+        .investment-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+        }
+        
+        .investment-item:last-child {
+            margin-bottom: 0;
+        }
+        
+        .investment-label {
+            font-size: 0.9rem;
+            color: #666;
+            font-weight: 500;
+        }
+        
+        .investment-value {
+            font-size: 0.9rem;
+            color: #1b5e20;
+            font-weight: 600;
+        }
+        
+        @media (max-width: 1200px) {
+            .testimonials-container {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1.5rem;
+            }
+            
+            .section-title {
+                font-size: 2.2rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .testimonials-container {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .testimonial-card {
+                padding: 1.5rem;
+            }
+        }
+
+
+        /* Ready to Invest Section */
+        
+        .invest-section {
+            max-width: 1400px;
+            margin: 0 auto 90px auto; /* Added bottom spacing */
+            padding: 90px 20px;
+        }
+        
+        .section-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: start;
+        }
+        
+        .left-content {
+            padding-right: 2rem;
+        }
+        
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #1b5e20;
+            margin-bottom: 1.5rem;
+        }
+        
+        .section-subtitle {
+            font-size: 1.2rem;
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 2rem;
+        }
+        
+        .why-choose-title {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: #1b5e20;
+            margin-bottom: 1.5rem;
+        }
+        
+        .benefits-list {
+            list-style-type: none;
+            padding-left: 0;
+            margin-bottom: 3rem;
+        }
+        
+        .benefits-list li {
+            margin-bottom: 1.5rem;
+            padding-left: 2rem;
+            position: relative;
+        }
+        
+        .benefits-list li:before {
+            content: "✓";
+            color: #2e7d32;
+            font-weight: bold;
+            font-size: 1.2rem;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+        
+        .benefit-title {
+            font-weight: 600;
+            color: #1b5e20;
+            margin-bottom: 0.3rem;
+        }
+        
+        .benefit-description {
+            color: #666;
+            line-height: 1.5;
+        }
+        
+        .divider {
+            height: 2px;
+            background-color: #e0e0e0;
+            margin: 2rem 0;
+        }
+        
+        .investment-summary {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            margin-bottom: 2rem;
+        }
+        
+        .summary-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #1b5e20;
+            margin-bottom: 1.5rem;
+        }
+        
+        .summary-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .summary-table tr {
+            border-bottom: 1px solid #f0f0f0;
+        }
+        
+        .summary-table tr:last-child {
+            border-bottom: none;
+        }
+        
+        .summary-table td {
+            padding: 0.8rem 0;
+            font-size: 1rem;
+        }
+        
+        .summary-table td:first-child {
+            color: #666;
+            font-weight: 500;
+            width: 50%;
+        }
+        
+        .summary-table td:last-child {
+            color: #333;
+            font-weight: 600;
+        }
+        
+        /* Form Styles */
+        .form-container {
+            background: white;
+            border-radius: 12px;
+            padding: 2.5rem;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        }
+        
+        .form-title {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: #1b5e20;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-label {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+        
+        .required {
+            color: #d32f2f;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: #2e7d32;
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+        
+        textarea.form-control {
+            resize: vertical;
+            min-height: 100px;
+        }
+        
+        .char-count {
+            text-align: right;
+            font-size: 0.8rem;
+            color: #666;
+            margin-top: 0.3rem;
+        }
+        
+        .submit-btn {
+            background-color: #2e7d32;
+            border-color: #2e7d32;
+            color: white;
+            padding: 12px 30px;
+            font-weight: 600;
+            width: 100%;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            transition: background-color 0.3s;
+            margin-top: 1rem;
+        }
+        
+        .submit-btn:hover {
+            background-color: #1b5e20;
+            border-color: #1b5e20;
+        }
+        
+        @media (max-width: 992px) {
+            .section-content {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+            
+            .left-content {
+                padding-right: 0;
+            }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+                gap: 0;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .form-container {
+                padding: 2rem;
+            }
+
+            .invest-section {
+            max-width: 1400px;
+            margin: 0 auto 90px auto; /* Added bottom spacing */
+            padding: 90px 20px;
+        }
+        }
+
+        /* Footer Styles */
+
+        
+        .content {
+            flex: 1;
+            padding: 2rem;
+        }
+        
+        .footer {
+            background-color: #1a1a1a;
+            color: #fff;
+            padding: 3rem 0 1rem 0;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .footer-main {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 3rem;
+            margin-bottom: 2rem;
+        }
+        
+        .footer-brand {
+            margin-bottom: 1.5rem;
+        }
+        
+        .footer-logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #2e7d32;
+            margin-bottom: 1rem;
+  font-family: "Charm", cursive;
+  font-weight: 700;
+  font-style: normal;
+
+        }
+        
+        .footer-description {
+            color: #ccc;
+            line-height: 1.6;
+            max-width: 400px;
+        }
+        
+        .footer-section h3 {
+            color: #fff;
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+        }
+        
+        .footer-links {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+        
+        .footer-links a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: #2e7d32;
+        }
+        
+        .footer-bottom {
+            border-top: 1px solid #333;
+            padding-top: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        
+        .copyright {
+            color: #999;
+            font-size: 0.9rem;
+        }
+        
+        .footer-legal {
+            display: flex;
+            gap: 2rem;
+        }
+        
+        .footer-legal a {
+            color: #999;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s;
+        }
+        
+        .footer-legal a:hover {
+            color: #ccc;
+        }
+        
+        @media (max-width: 768px) {
+            .footer-main {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .footer-bottom {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .footer-legal {
+                justify-content: center;
             }
         }
