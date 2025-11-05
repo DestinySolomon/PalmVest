@@ -119,3 +119,53 @@ document.addEventListener('DOMContentLoaded', function() {
     // Initialize with scroll check
     handleScroll();
 });
+
+// Register Form 
+
+    // ✅ Show/Hide Password
+    function togglePassword(id, icon) {
+        const field = document.getElementById(id);
+        const eye = icon.querySelector("i");
+
+        if (field.type === "password") {
+            field.type = "text";
+            eye.classList.remove("bi-eye");
+            eye.classList.add("bi-eye-slash");
+        } else {
+            field.type = "password";
+            eye.classList.remove("bi-eye-slash");
+            eye.classList.add("bi-eye");
+        }
+    }
+
+    // ✅ Password Strength Checker
+    const password = document.getElementById("password");
+    const bar = document.getElementById("strengthIndicator");
+
+    password.addEventListener("input", () => {
+        const val = password.value;
+        let strength = 0;
+
+        if (val.length >= 6) strength++;
+        if (/[A-Z]/.test(val)) strength++;
+        if (/[0-9]/.test(val)) strength++;
+        if (/[^A-Za-z0-9]/.test(val)) strength++;
+
+        if (strength === 0) { bar.style.width = "0%"; }
+        if (strength === 1) { bar.style.width = "25%"; bar.style.background = "red"; }
+        if (strength === 2) { bar.style.width = "50%"; bar.style.background = "orange"; }
+        if (strength === 3) { bar.style.width = "75%"; bar.style.background = "gold"; }
+        if (strength === 4) { bar.style.width = "100%"; bar.style.background = "green"; }
+    });
+
+    // ✅ Confirm Password Match
+    const confirmPassword = document.getElementById("confirm_password");
+    const matchText = document.getElementById("matchText");
+
+    confirmPassword.addEventListener("input", () => {
+        if (confirmPassword.value !== password.value) {
+            matchText.textContent = "Passwords do not match";
+        } else {
+            matchText.textContent = "";
+        }
+    });
