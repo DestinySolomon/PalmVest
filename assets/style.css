@@ -70,7 +70,7 @@ body {
 /* Hero Section */
 .hero-section {
   background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
-    url("assets/new-hero-image.jpg");
+    url("../assets/new-hero-image.jpg");
   background-size: cover;
   background-position: center;
   color: white;
@@ -80,7 +80,7 @@ body {
   display: flex;
   align-items: center;
   margin-bottom: 40px; /* Added spacing */
-    margin-top: -80px; /* Compensate for fixed navbar */
+  margin-top: -80px; /* Compensate for fixed navbar */
 }
 
 .hero-title {
@@ -1110,6 +1110,148 @@ textarea.form-control {
     padding: 90px 20px;
   }
 }
+
+/* ======Register Page Styles== */
+
+        .wrapper {
+            max-width: 1000px;
+            margin: 60px auto;
+            background: #fff;
+            border-radius: 15px;
+            overflow: hidden;
+            display: flex;
+            flex-wrap: wrap;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+
+        /* LEFT BOX */
+        .left-box {
+            flex: 1;
+            min-width: 350px;
+            background: var(--primary-color);
+            padding: 50px;
+            color: white;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .left-title {
+            font-size: 2.4rem;
+            font-weight: 700;
+        }
+
+        .left-text {
+            margin-top: 12px;
+            font-size: 1.05rem;
+            opacity: .95;
+            line-height: 1.7;
+        }
+
+        /* RIGHT BOX */
+        .right-box {
+            flex: 1;
+            min-width: 350px;
+            padding: 50px;
+        }
+
+        .signup-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .ref-box {
+            padding: 10px;
+            border-radius: 6px;
+            margin-bottom: 15px;
+        }
+
+        .ref-user { background: #e7fce7; border-left: 4px solid #2e7d32; }
+        .ref-admin { background: #e8f3ff; border-left: 4px solid #2962ff; }
+
+        .form-control { height: 48px; border-radius: 10px; }
+
+        .input-group-text {
+            background: white;
+            cursor: pointer;
+            border-left: none;
+            border-radius: 0 10px 10px 0;
+        }
+
+        .strength-bar {
+            height: 8px;
+            width: 100%;
+            background: #ddd;
+            border-radius: 5px;
+            margin-top: 6px;
+        }
+        .strength-bar span {
+            height: 100%;
+            width: 0;
+            display: block;
+            border-radius: 5px;
+        }
+
+        .signup-btn {
+            width: 100%;
+            height: 50px;
+            border: none;
+            background: var(--primary-color);
+            color: white;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .signup-btn:hover {
+            background: var(--dark-color);
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
 
 /* Back to Top Button */
 .back-to-top {
