@@ -129,15 +129,24 @@ function creditWallet($user_id, $amount) {
 
 
 // ===========================================================
-// ✅ LOG TRANSACTION
+// ✅ LOG TRANSACTION (UPDATED FOR NEW TRANSACTIONS TABLE)
 // ===========================================================
-function logTransaction($user_id, $amount, $description) {
+function logTransaction($user_id, $amount, $description, $metadata = '') {
     global $conn;
-
-    $stmt = $conn->prepare("INSERT INTO transactions (user_id, amount, description, status)
-                            VALUES (?, ?, ?, 'success')");
-    $stmt->bind_param("ids", $user_id, $amount, $description);
-    $stmt->execute();
+    
+    // Get current balance for the user
+    $current_balance = get_wallet_balance($user_id);
+    $new_balance = $current_balance + $amount;
+    
+    // Determine transaction type based on amount
+    $type = $amount > 0 ? 'credit' : 'debit';
+    
+    // Insert transaction with all required fields
+    $stmt = $conn->prepare("INSERT INTO transactions (user_id, amount, description, metadata, balance_after, status, created_at) 
+                            VALUES (?, ?, ?, ?, ?, ?, NOW())");
+    $stmt->bind_param("idssds", $user_id, $amount, $description, $metadata, $new_balance, $type);
+    
+    return $stmt->execute();
 }
 
 
@@ -146,13 +155,13 @@ function logTransaction($user_id, $amount, $description) {
 // ✅ DIRECT REFERRAL BONUS
 // ===========================================================
 function giveReferralBonus($referrer_id, $from_user, $amount = 1000) {
-
     // ✅ Credit referrer
     creditWallet($referrer_id, $amount);
 
-    // ✅ Log transaction
+    // ✅ Log transaction with metadata
     $desc = "Referral bonus from user #$from_user";
-    logTransaction($referrer_id, $amount, $desc);
+    $metadata = "referral_bonus";
+    logTransaction($referrer_id, $amount, $desc, $metadata);
 }
 
 
@@ -169,10 +178,16 @@ function giveAdminBonus($from_user, $amount = 500) {
     $stmt->execute();
 
     // ✅ log admin transaction (user_id = 0)
-    logTransaction(0, $amount, "Admin override bonus from user #$from_user");
+    $desc = "Admin override bonus from user #$from_user";
+    $metadata = "admin_bonus";
+    logTransaction(0, $amount, $desc, $metadata);
 }
 
-//INVESTMENT MATURITY DAY CODES
+
+
+// ===========================================================
+// ✅ INVESTMENT MATURITY DAY CALCULATION
+// ===========================================================
 function daysToMaturity($maturity_date) {
     $today = new DateTime();
     $maturity = new DateTime($maturity_date);
@@ -184,3 +199,95 @@ function daysToMaturity($maturity_date) {
     return $diff->days;
 }
 
+
+
+// ===========================================================
+// ✅ GET TRANSACTION STATISTICS (NEW)
+// ===========================================================
+function get_transaction_stats($user_id) {
+    global $conn;
+
+    $stmt = $conn->prepare("SELECT 
+        COUNT(*) as total_transactions,
+        SUM(CASE WHEN amount > 0 THEN amount ELSE 0 END) as total_income,
+        SUM(CASE WHEN amount < 0 THEN amount ELSE 0 END) as total_expenses
+    FROM transactions 
+    WHERE user_id = ?");
+
+    $stmt->bind_param("i", $user_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    
+    return $result->fetch_assoc();
+}
+
+
+
+// ===========================================================
+// ✅ GET TRANSACTIONS WITH FILTERS (NEW)
+// ===========================================================
+function get_filtered_transactions($user_id, $type = '', $date_filter = '') {
+    global $conn;
+
+    $sql = "SELECT * FROM transactions WHERE user_id = ?";
+    $params = [$user_id];
+    $types = "i";
+
+    if ($type === 'credit') {
+        $sql .= " AND amount > 0";
+    } elseif ($type === 'debit') {
+        $sql .= " AND amount < 0";
+    }
+
+    if ($date_filter) {
+        $current_date = date('Y-m-d');
+        switch($date_filter) {
+            case 'today':
+                $sql .= " AND DATE(created_at) = ?";
+                $params[] = $current_date;
+                $types .= "s";
+                break;
+            case 'week':
+                $sql .= " AND created_at >= DATE_SUB(NOW(), INTERVAL 7 DAY)";
+                break;
+            case 'month':
+                $sql .= " AND created_at >= DATE_SUB(NOW(), INTERVAL 30 DAY)";
+                break;
+        }
+    }
+
+    $sql .= " ORDER BY created_at DESC";
+
+    $stmt = $conn->prepare($sql);
+    
+    if (count($params) > 1) {
+        $stmt->bind_param($types, ...$params);
+    } else {
+        $stmt->bind_param($types, $user_id);
+    }
+    
+    $stmt->execute();
+    return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+}
+
+
+
+// ===========================================================
+// ✅ FORMAT CURRENCY (NEW)
+// ===========================================================
+function format_currency($amount) {
+    return '₦' . number_format(abs($amount), 2);
+}
+
+
+
+// ===========================================================
+// ✅ GET TRANSACTION TYPE BADGE (NEW)
+// ===========================================================
+function get_transaction_type_badge($amount) {
+    if ($amount > 0) {
+        return '<span class="badge bg-success">Credit</span>';
+    } else {
+        return '<span class="badge bg-danger">Debit</span>';
+    }
+}
