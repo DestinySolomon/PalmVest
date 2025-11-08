@@ -183,3 +183,69 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 });
+
+
+
+//WALLET SECTION Quick Amount Buttons Script -->
+
+document.addEventListener('DOMContentLoaded', function() {
+    const fundAmountInput = document.getElementById('fundAmount');
+    const withdrawAmountInput = document.getElementById('withdrawAmount');
+    
+    // Quick amount buttons for funding
+    const quickAmounts = [1000, 5000, 10000, 20000, 50000];
+    
+    // Create quick amount buttons for funding
+    const quickAmountsContainer = document.createElement('div');
+    quickAmountsContainer.className = 'mb-3';
+    quickAmountsContainer.innerHTML = '<label class="form-label">Quick Amounts</label><div class="d-flex gap-2 flex-wrap" id="quickAmounts"></div>';
+    
+    fundAmountInput.parentNode.parentNode.after(quickAmountsContainer);
+    
+    const quickAmountsDiv = document.getElementById('quickAmounts');
+    quickAmounts.forEach(amount => {
+        const button = document.createElement('button');
+        button.type = 'button';
+        button.className = 'btn btn-outline-primary btn-sm';
+        button.textContent = '₦' + amount.toLocaleString();
+        button.addEventListener('click', function() {
+            fundAmountInput.value = amount;
+        });
+        quickAmountsDiv.appendChild(button);
+    });
+
+    // Quick amount buttons for withdrawal
+    const withdrawQuickAmounts = [1000, 5000, 10000, 20000, 50000];
+    const withdrawQuickContainer = document.createElement('div');
+    withdrawQuickContainer.className = 'mb-3';
+    withdrawQuickContainer.innerHTML = '<label class="form-label">Quick Amounts</label><div class="d-flex gap-2 flex-wrap" id="withdrawQuickAmounts"></div>';
+    
+    withdrawAmountInput.parentNode.parentNode.after(withdrawQuickContainer);
+    
+    const withdrawQuickAmountsDiv = document.getElementById('withdrawQuickAmounts');
+    withdrawQuickAmounts.forEach(amount => {
+        const button = document.createElement('button');
+        button.type = 'button';
+        button.className = 'btn btn-outline-success btn-sm';
+        button.textContent = '₦' + amount.toLocaleString();
+        button.addEventListener('click', function() {
+            if (amount <=  $wallet_balance ) {
+                withdrawAmountInput.value = amount;
+            } else {
+                alert('Amount exceeds available balance');
+            }
+        });
+        withdrawQuickAmountsDiv.appendChild(button);
+    });
+
+    // Auto-hide alerts
+    setTimeout(function() {
+        const alerts = document.querySelectorAll('.alert.auto-hide');
+        alerts.forEach(function(alert) {
+            const bsAlert = new bootstrap.Alert(alert);
+            bsAlert.close();
+        });
+    }, 5000);
+});
+
+
