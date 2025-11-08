@@ -2,6 +2,27 @@
 require_once __DIR__ . '/../../../config/db.php';
 require_once __DIR__ . '/../helpers.php';
 
+
+
+// Display success/error messages
+
+// Display success/error messages
+if (isset($_SESSION['buy_success'])) {
+    echo '<div class="alert alert-success alert-dismissible fade show auto-hide" role="alert" data-bs-delay="5000">
+            ' . $_SESSION['buy_success'] . '
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+          </div>';
+    unset($_SESSION['buy_success']);
+}
+
+if (isset($_SESSION['buy_error'])) {
+    echo '<div class="alert alert-danger alert-dismissible fade show auto-hide" role="alert" data-bs-delay="5000">
+            ' . $_SESSION['buy_error'] . '
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+          </div>';
+    unset($_SESSION['buy_error']);
+}
+
 // Fetch verified sellers with listings
 $sql = "SELECT 
             oil_listings.id AS listing_id,

@@ -174,3 +174,18 @@ if (signupForm && confirmPasswordField && passwordField) {
     }
   });
 }
+
+// error message on buy modal 
+// Auto-hide alerts after 5 seconds
+document.addEventListener('DOMContentLoaded', function() {
+    const alerts = document.querySelectorAll('.alert.auto-hide');
+    
+    alerts.forEach(function(alert) {
+        const delay = alert.getAttribute('data-bs-delay') || 5000;
+        
+        setTimeout(function() {
+            const bsAlert = new bootstrap.Alert(alert);
+            bsAlert.close();
+        }, delay);
+    });
+});

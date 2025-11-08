@@ -32,3 +32,12 @@ $stakes = $conn->query("
     <?php endwhile; ?>
     </tbody>
 </table>
+
+
+
+
+
+
+
+
+
