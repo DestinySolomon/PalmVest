@@ -44,3 +44,11 @@ $stmt5->bind_param("ii", $buy_qty, $listing_id);
 $stmt5->execute();
 
 echo "Purchase successful! Your oil has been staked.";
+
+
+
+// Log purchase
+logTransaction($user_id, -$total_cost, "Purchased $qty units of palm oil");
+
+header("Location: ../index.php?page=buy_oil&success=1");
+exit();
