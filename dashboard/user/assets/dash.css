@@ -1,11 +1,13 @@
-/* Theme */
+/* =========================================================
+   PALMVEST DASHBOARD THEME
+   ========================================================= */
 :root {
   --primary: #2e7d32;
   --dark: #1b5e20;
   --light: #e8f5e9;
 }
 
-/* BASIC */
+/* BODY */
 body.pv-body {
   background: linear-gradient(180deg, #2e7d32 0%, #1b5e20 100%);
   color: white;
@@ -13,76 +15,26 @@ body.pv-body {
   font-family: Arial, sans-serif;
 }
 
-/* SIDEBAR */
-.pv-sidebar {
-  width: 250px;
-  background: var(--primary);
-  position: fixed;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  padding: 20px;
-  overflow-y: auto;
-  transition: transform .2s ease;
-}
-
-.pv-sidebar.hide {
-  transform: translateX(-260px);
-}
-
-/* Brand */
-.pv-brand {
-  font-size: 1.4rem;
-  font-weight: bold;
-  margin-bottom: 20px;
-}
-
-/* NAV */
-.pv-nav a {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 12px;
-  border-radius: 8px;
-  text-decoration: none;
-  color: white;
-  margin-bottom: 8px;
-}
-
-.pv-nav a:hover,
-.pv-nav a.active {
-  background: rgba(255, 255, 255, 0.25);
-}
-
-/* MAIN AREA */
-.pv-main {
-  margin-left: 250px;
-  transition: margin-left .2s ease;
-}
-
-.pv-main.full {
-  margin-left: 0 !important;
-}
-
-/* TOPBAR */
+/* =========================================================
+   TOP NAVBAR
+   ========================================================= */
 .pv-topbar {
   display: flex;
   align-items: center;
-  gap: 12px;
   justify-content: space-between;
   padding: 12px 18px;
-  background: rgba(0, 0, 0, 0.15);
-  backdrop-filter: blur(5px);
+  background: rgba(0, 0, 0, 0.25);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 2000;
+  backdrop-filter: blur(6px);
 }
 
 .pv-greeting {
   text-align: center;
   flex: 1;
-}
-
-.pv-avatar-wrap {
-  display: flex;
-  align-items: center;
 }
 
 .pv-avatar {
@@ -92,32 +44,235 @@ body.pv-body {
   border: 2px solid white;
 }
 
+.pv-avatar-wrap {
+  display: flex;
+  align-items: center;
+}
+
 /* HAMBURGER */
 .pv-hamburger {
-  display: none;
   background: transparent;
   border: none;
   color: white;
-  font-size: 1.6rem;
+  font-size: 1.7rem;
+  cursor: pointer;
 }
 
+/* =========================================================
+   SIDEBAR
+   ========================================================= */
+.pv-sidebar {
+  width: 250px;
+  background: var(--primary);
+  position: fixed;
+  top: 60px;              /* ✅ BELOW TOPBAR */
+  bottom: 0;
+  left: 0;
+  padding: 20px;
+  overflow-y: auto;
+  z-index: 1500;
+  transition: transform .3s ease;
+}
 
-/* CONTENT */
+.pv-sidebar.hide {
+  transform: translateX(-270px);
+}
+
+.pv-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1.3rem;
+  font-weight: bold;
+  padding-bottom: 15px;
+}
+
+.pv-logo-img {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+  border-radius: 8px;
+}
+
+/* NAV ITEMS */
+.pv-nav a {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px;
+  margin-bottom: 8px;
+  color: white;
+  text-decoration: none;
+  border-radius: 8px;
+  transition: background 0.2s ease;
+}
+
+.pv-nav a:hover,
+.pv-nav a.active {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+/* =========================================================
+   MAIN CONTENT
+   ========================================================= */
+.pv-main {
+  margin-left: 250px;
+  margin-top: 60px;
+  padding-top: 20px;
+  transition: margin-left .3s ease;
+}
+
+.pv-main.full {
+  margin-left: 0 !important;
+}
+
 .pv-content {
   padding: 20px;
 }
 
-/* RESPONSIVE */
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
 @media (max-width: 900px) {
-  .pv-hamburger {
-    display: inline-block;
-  }
-
-  .pv-sidebar {
-    transform: translateX(-260px);
-  }
 
   .pv-main {
     margin-left: 0 !important;
+  }
+
+  .pv-sidebar {
+    transform: translateX(-270px);
+  }
+
+  .pv-sidebar.hide {
+    transform: translateX(0);
+  }
+
+  .pv-hamburger {
+    display: inline-block !important;
+  }
+}
+
+/* Desktop: hide hamburger */
+@media (min-width: 901px) {
+  .pv-hamburger {
+    display: none !important;
+  }
+}
+
+/* Extra margin fix */
+.pv-sidebar {
+  margin-top: 20px;
+}
+
+/* =========================================================
+   ✅ WHATSAPP CHAT WIDGET + ANIMATIONS + MOBILE
+   ========================================================= */
+
+/* Wrapper for bubble + button */
+.pv-chat-wrapper {
+  position: fixed;
+  bottom: 23px;
+  right: 23px;
+  z-index: 99999;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  animation: fadeIn 1s ease-out forwards;
+}
+
+/* Fade-in */
+@keyframes fadeIn {
+  0% { opacity: 0; transform: translateY(10px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+/* Speech Bubble */
+.pv-chat-text {
+  background: white;
+  color: #1b5e20;
+  padding: 10px 15px;
+  font-size: 14px;
+  font-weight: bold;
+  border-radius: 15px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  white-space: nowrap;
+  border-left: 4px solid #25D366;
+  animation: bubbleSlide .6s ease-out forwards;
+}
+
+@keyframes bubbleSlide {
+  0% { opacity: 0; transform: translateX(12px); }
+  100% { opacity: 1; transform: translateX(0); }
+}
+
+/* Main bubble button */
+.pv-chat-widget {
+  position: relative;
+  width: 60px;
+  height: 60px;
+  background: #25D366;
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 30px;
+  text-decoration: none;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.25);
+  animation: popIn .45s ease-out forwards;
+  transform: scale(0);
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+
+.pv-chat-widget:hover {
+  transform: scale(1.12);
+  box-shadow: 0 10px 26px rgba(0,0,0,0.35);
+}
+
+/* Pop-in animation */
+@keyframes popIn {
+  0% { transform: scale(0); opacity: 0; }
+  60% { transform: scale(1.15); opacity: 1; }
+  100% { transform: scale(1); }
+}
+
+/* Pulse glow */
+.pv-chat-pulse {
+  position: absolute;
+  width: 82px;
+  height: 82px;
+  background: rgba(37,211,102,0.25);
+  border-radius: 50%;
+  z-index: -1;
+  animation: pulseAnim 1.8s infinite ease-out;
+}
+
+@keyframes pulseAnim {
+  0% { transform: scale(0.8); opacity: 0.8; }
+  70% { transform: scale(1.4); opacity: 0; }
+  100% { transform: scale(0.8); opacity: 0; }
+}
+
+/* ✅ MOBILE OPTIMIZATION */
+@media (max-width: 500px) {
+
+  .pv-chat-text {
+    display: none;
+  }
+
+  .pv-chat-wrapper {
+    bottom: 18px;
+    right: 18px;
+  }
+
+  .pv-chat-widget {
+    width: 52px;
+    height: 52px;
+    font-size: 26px;
+  }
+
+  .pv-chat-pulse {
+    width: 68px;
+    height: 68px;
   }
 }

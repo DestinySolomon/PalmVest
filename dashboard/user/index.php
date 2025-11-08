@@ -1,4 +1,5 @@
 <?php
+
 session_start();
 if (!isset($_SESSION['user_id'])) {
     header("Location: ../../login.php");
@@ -7,10 +8,12 @@ if (!isset($_SESSION['user_id'])) {
 
 function greetUser($name) {
     $h = date("H");
-    if ($h < 12) return "Good morning, $name 🌤️";
-    if ($h < 18) return "Good afternoon, $name ☀️";
-    return "Good evening, $name 🌙";
+    if ($h < 12) return "Good morning, $name ";
+    if ($h < 18) return "Good afternoon, $name ";
+    return "Good evening, $name ";
 }
+
+ 
 ?>
 
 <!DOCTYPE html>
@@ -31,9 +34,33 @@ function greetUser($name) {
 
 <body class="pv-body">
 
-<!-- SIDEBAR -->
+<!-- ✅ FIXED TOP NAVBAR -->
+<header class="pv-topbar">
+
+    <!-- Left: Hamburger -->
+    <button id="sidebarToggle" class="pv-hamburger">
+        <i class="bi bi-list"></i>
+    </button>
+
+    <!-- Center: Greeting -->
+    <div class="pv-greeting text-center flex-grow-1">
+        <div class="fw-bold"><?= greetUser($_SESSION['user_name']); ?></div>
+    </div>
+
+    <!-- Right: Avatar -->
+    <div class="pv-avatar-wrap">
+        <img src="https://i.pravatar.cc/50?u=<?= $_SESSION['user_id']; ?>" 
+            alt="profile" class="pv-avatar">
+    </div>
+
+</header>
+
+<!-- ✅ SIDEBAR BELOW NAVBAR -->
 <aside class="pv-sidebar" id="sidebar">
-    <div class="pv-brand">PalmVest</div>
+    <div class="pv-brand">
+        <img src="../../assets/logo.png" class="pv-logo-img" alt="PalmVest Logo">
+        <span>PalmVest</span>
+    </div>
 
     <nav class="pv-nav">
         <a href="?page=overview" class="active"><i class="bi bi-speedometer2"></i> Overview</a>
@@ -46,33 +73,11 @@ function greetUser($name) {
     </nav>
 </aside>
 
-<!-- MAIN -->
+<!-- ✅ MAIN CONTENT -->
 <main class="pv-main">
 
-    <!-- TOPBAR -->
-    <header class="pv-topbar">
+    <section class="pv-content" id="pvContent">
 
-        <!-- Left: Hamburger -->
-        <button id="sidebarToggle" class="pv-hamburger">
-            <i class="bi bi-list"></i>
-        </button>
-
-        <!-- Center: Greeting -->
-        <div class="pv-greeting text-center flex-grow-1">
-            <div class="fw-bold"><?= greetUser($_SESSION['user_name']); ?></div>
-            <div class="small text-light">PalmVest Dashboard</div>
-        </div>
-
-        <!-- Right: Avatar -->
-        <div class="pv-avatar-wrap">
-            <img src="https://i.pravatar.cc/50?u=<?= $_SESSION['user_id']; ?>" 
-                alt="profile" class="pv-avatar">
-        </div>
-
-    </header>
-
-    <!-- CONTENT AREA -->
-    <section class="pv-content">
         <?php
             $page = $_GET['page'] ?? 'overview';
             $file = __DIR__ . "/sections/$page.php";
@@ -83,10 +88,29 @@ function greetUser($name) {
                 echo "<div class='text-light p-3'>Page not found.</div>";
             }
         ?>
+
     </section>
 
 </main>
 
+
+<!-- ✅ ✅ ✅ WHATSAPP CHAT WIDGET -->
+<div class="pv-chat-wrapper">
+
+    <div class="pv-chat-text">Need Help?</div>
+
+    <a href="https://wa.me/234XXXXXXXXXX?text=Hello%20PalmVest%20Support.%20I%20need%20help%20with..." 
+       class="pv-chat-widget" 
+       target="_blank">
+        <div class="pv-chat-pulse"></div>
+        <i class="bi bi-whatsapp"></i>
+    </a>
+
+</div>
+<!-- ✅ END CHAT WIDGET -->
+
+<!-- Bootstrap JS (before your dash.js) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 <script src="./assets/dash.js"></script>
 </body>
 </html>
