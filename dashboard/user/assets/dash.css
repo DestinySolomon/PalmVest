@@ -29,6 +29,7 @@ body.pv-body {
   left: 0;
   right: 0;
   z-index: 2000;
+  -webkit-backdrop-filter: blur(6px);
   backdrop-filter: blur(6px);
 }
 
