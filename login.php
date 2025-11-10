@@ -152,6 +152,9 @@ session_start();
             </div>
 
             <button type="submit" class="signup-btn">Login</button>
+            <div class="text-center mt-3">
+              <a href="forgot_password.php" class="text-decoration-none">Forgot Password?</a>
+             </div>
 
             <div class="login-link text-center mt-3">
                 Don't have an account? <a href="register.php">Create Account</a>

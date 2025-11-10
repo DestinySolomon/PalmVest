@@ -4,13 +4,19 @@ require_once __DIR__ . "/../../config/db.php";
 
 
 // ===========================================================
-// ✅ GET USER WALLET BALANCE
+// ✅ GET USER WALLET BALANCE (supports currency)
 // ===========================================================
-function get_wallet_balance($user_id) {
+function get_wallet_balance($user_id, $currency = null) {
     global $conn;
 
-    $stmt = $conn->prepare("SELECT balance FROM wallets WHERE user_id = ? LIMIT 1");
-    $stmt->bind_param("i", $user_id);
+    if ($currency) {
+        $stmt = $conn->prepare("SELECT balance FROM wallets WHERE user_id = ? AND currency = ? LIMIT 1");
+        $stmt->bind_param("is", $user_id, $currency);
+    } else {
+        $stmt = $conn->prepare("SELECT balance FROM wallets WHERE user_id = ? LIMIT 1");
+        $stmt->bind_param("i", $user_id);
+    }
+
     $stmt->execute();
     $res = $stmt->get_result();
 
@@ -40,11 +46,9 @@ function get_total_oil_purchased($user_id) {
 // ===========================================================
 // ✅ GET NUMBER OF DIRECT REFERRALS
 // ===========================================================
-// ✅ This is the correct version — fast, stable, accurate
 function get_referral_count($ref_code) {
     global $conn;
 
-    // Step 1: get user_id of referrer
     $stmt = $conn->prepare("SELECT id FROM users WHERE referral_code = ? LIMIT 1");
     $stmt->bind_param("s", $ref_code);
     $stmt->execute();
@@ -54,7 +58,6 @@ function get_referral_count($ref_code) {
 
     $referrer_id = intval($res->fetch_assoc()['id']);
 
-    // Step 2: count referrals
     $stmt = $conn->prepare("SELECT COUNT(*) AS total FROM users WHERE referrer_id = ?");
     $stmt->bind_param("i", $referrer_id);
     $stmt->execute();
@@ -105,46 +108,51 @@ function getGlobalAdminID() {
     $q = $conn->query("SELECT setting_value FROM system_settings WHERE setting_key='global_upline_id' LIMIT 1");
     $row = $q->fetch_assoc();
 
-    return intval($row['setting_value']);  // Should always return 1
+    return intval($row['setting_value']); // usually 1
 }
 
 
 
 // ===========================================================
-// ✅ CREDIT WALLET (AUTO CREATES WALLET IF MISSING)
+// ✅ CREDIT WALLET (AUTO CREATES IF MISSING, supports currency)
 // ===========================================================
-function creditWallet($user_id, $amount) {
+function creditWallet($user_id, $amount, $currency = 'NGN') {
     global $conn;
 
-    // ✅ Ensure wallet exists
-    $conn->query("INSERT INTO wallets (user_id, balance) VALUES ($user_id, 0)
-                  ON DUPLICATE KEY UPDATE balance = balance");
+    // Ensure wallet exists
+    $check = $conn->prepare("SELECT id FROM wallets WHERE user_id=? AND currency=? LIMIT 1");
+    $check->bind_param("is", $user_id, $currency);
+    $check->execute();
+    $res = $check->get_result();
 
-    // ✅ Add balance
-    $stmt = $conn->prepare("UPDATE wallets SET balance = balance + ? WHERE user_id = ?");
-    $stmt->bind_param("di", $amount, $user_id);
+    if ($res->num_rows == 0) {
+        $create = $conn->prepare("INSERT INTO wallets (user_id, balance, currency) VALUES (?, 0, ?)");
+        $create->bind_param("is", $user_id, $currency);
+        $create->execute();
+    }
+
+    // Update balance
+    $stmt = $conn->prepare("UPDATE wallets SET balance = balance + ? WHERE user_id = ? AND currency = ?");
+    $stmt->bind_param("dis", $amount, $user_id, $currency);
     $stmt->execute();
 }
 
 
 
 // ===========================================================
-// ✅ LOG TRANSACTION (UPDATED FOR NEW TRANSACTIONS TABLE)
+// ✅ LOG TRANSACTION (supports currency)
 // ===========================================================
-function logTransaction($user_id, $amount, $description, $metadata = '') {
+function logTransaction($user_id, $amount, $description, $metadata = '', $currency = 'NGN') {
     global $conn;
     
-    // Get current balance for the user
-    $current_balance = get_wallet_balance($user_id);
+    $current_balance = get_wallet_balance($user_id, $currency);
     $new_balance = $current_balance + $amount;
-    
-    // Determine transaction type based on amount
     $type = $amount > 0 ? 'credit' : 'debit';
     
-    // Insert transaction with all required fields
-    $stmt = $conn->prepare("INSERT INTO transactions (user_id, amount, description, metadata, balance_after, status, created_at) 
-                            VALUES (?, ?, ?, ?, ?, ?, NOW())");
-    $stmt->bind_param("idssds", $user_id, $amount, $description, $metadata, $new_balance, $type);
+    $stmt = $conn->prepare("INSERT INTO transactions 
+        (user_id, amount, currency, description, metadata, balance_after, status, created_at) 
+        VALUES (?, ?, ?, ?, ?, ?, ?, NOW())");
+    $stmt->bind_param("idsssss", $user_id, $amount, $currency, $description, $metadata, $new_balance, $type);
     
     return $stmt->execute();
 }
@@ -155,32 +163,44 @@ function logTransaction($user_id, $amount, $description, $metadata = '') {
 // ✅ DIRECT REFERRAL BONUS
 // ===========================================================
 function giveReferralBonus($referrer_id, $from_user, $amount = 1000) {
-    // ✅ Credit referrer
-    creditWallet($referrer_id, $amount);
+    global $conn;
 
-    // ✅ Log transaction with metadata
+    // Get referrer’s currency
+    $curQuery = $conn->prepare("SELECT currency FROM users WHERE id=? LIMIT 1");
+    $curQuery->bind_param("i", $referrer_id);
+    $curQuery->execute();
+    $refCurrency = $curQuery->get_result()->fetch_assoc()['currency'] ?? 'NGN';
+
+    creditWallet($referrer_id, $amount, $refCurrency);
+
     $desc = "Referral bonus from user #$from_user";
     $metadata = "referral_bonus";
-    logTransaction($referrer_id, $amount, $desc, $metadata);
+    logTransaction($referrer_id, $amount, $desc, $metadata, $refCurrency);
 }
 
 
 
 // ===========================================================
-// ✅ ADMIN OVERRIDE BONUS
+// ✅ ADMIN OVERRIDE BONUS (global bonus on all registrations)
 // ===========================================================
 function giveAdminBonus($from_user, $amount = 500) {
     global $conn;
 
-    // ✅ credit admin wallet
-    $stmt = $conn->prepare("UPDATE admin_wallet SET balance = balance + ? WHERE id = 1");
-    $stmt->bind_param("d", $amount);
-    $stmt->execute();
+    $admin_id = getGlobalAdminID();
 
-    // ✅ log admin transaction (user_id = 0)
+    // Get admin’s currency (defaults to NGN)
+    $curQuery = $conn->prepare("SELECT currency FROM users WHERE id=? LIMIT 1");
+    $curQuery->bind_param("i", $admin_id);
+    $curQuery->execute();
+    $adminCurrency = $curQuery->get_result()->fetch_assoc()['currency'] ?? 'NGN';
+
+    // Credit admin wallet
+    creditWallet($admin_id, $amount, $adminCurrency);
+
+    // Log transaction
     $desc = "Admin override bonus from user #$from_user";
     $metadata = "admin_bonus";
-    logTransaction(0, $amount, $desc, $metadata);
+    logTransaction($admin_id, $amount, $desc, $metadata, $adminCurrency);
 }
 
 
@@ -193,16 +213,13 @@ function daysToMaturity($maturity_date) {
     $maturity = new DateTime($maturity_date);
     $diff = $today->diff($maturity);
 
-    // If maturity date has passed
-    if ($maturity < $today) return 0;
-
-    return $diff->days;
+    return $maturity < $today ? 0 : $diff->days;
 }
 
 
 
 // ===========================================================
-// ✅ GET TRANSACTION STATISTICS (NEW)
+// ✅ GET TRANSACTION STATISTICS
 // ===========================================================
 function get_transaction_stats($user_id) {
     global $conn;
@@ -213,7 +230,6 @@ function get_transaction_stats($user_id) {
         SUM(CASE WHEN amount < 0 THEN amount ELSE 0 END) as total_expenses
     FROM transactions 
     WHERE user_id = ?");
-
     $stmt->bind_param("i", $user_id);
     $stmt->execute();
     $result = $stmt->get_result();
@@ -224,7 +240,7 @@ function get_transaction_stats($user_id) {
 
 
 // ===========================================================
-// ✅ GET TRANSACTIONS WITH FILTERS (NEW)
+// ✅ GET TRANSACTIONS WITH FILTERS
 // ===========================================================
 function get_filtered_transactions($user_id, $type = '', $date_filter = '') {
     global $conn;
@@ -259,13 +275,7 @@ function get_filtered_transactions($user_id, $type = '', $date_filter = '') {
     $sql .= " ORDER BY created_at DESC";
 
     $stmt = $conn->prepare($sql);
-    
-    if (count($params) > 1) {
-        $stmt->bind_param($types, ...$params);
-    } else {
-        $stmt->bind_param($types, $user_id);
-    }
-    
+    $stmt->bind_param($types, ...$params);
     $stmt->execute();
     return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
 }
@@ -273,16 +283,17 @@ function get_filtered_transactions($user_id, $type = '', $date_filter = '') {
 
 
 // ===========================================================
-// ✅ FORMAT CURRENCY (NEW)
+// ✅ FORMAT CURRENCY SYMBOL (based on currency)
 // ===========================================================
-function format_currency($amount) {
-    return '₦' . number_format(abs($amount), 2);
+function format_currency($amount, $currency = 'NGN') {
+    $symbol = ($currency === 'USDT') ? '$' : '₦';
+    return $symbol . number_format(abs($amount), 2);
 }
 
 
 
 // ===========================================================
-// ✅ GET TRANSACTION TYPE BADGE (NEW)
+// ✅ TRANSACTION TYPE BADGE
 // ===========================================================
 function get_transaction_type_badge($amount) {
     if ($amount > 0) {
