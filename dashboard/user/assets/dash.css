@@ -64,7 +64,7 @@ body.pv-body {
    ========================================================= */
 .pv-sidebar {
   width: 250px;
-  background: var(--primary);
+  background: rgb(1, 41, 1);
   position: fixed;
   top: 60px; /* ✅ BELOW TOPBAR */
   bottom: 0;
