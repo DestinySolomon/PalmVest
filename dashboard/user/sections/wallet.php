@@ -77,7 +77,7 @@ $pending_withdrawals = $pending_result['pending_count'] ?? 0;
                     <div class="col-md-6 text-md-start">
                         <h6 class="text-muted mb-1">Available Balance</h6>
                         <h1 class="text-success mb-0">₦<?= number_format($wallet_balance, 2) ?></h1>
-                        <small class="text-muted">Last updated: <?= date('M j, Y g:i A') ?></small>
+                        <small class="text-light">Last updated: <?= date('M j, Y g:i A') ?></small>
                     </div>
                     <div class="col-md-6 text-md-end">
                         <button class="btn btn-warning btn-lg me-2" data-bs-toggle="modal" data-bs-target="#fundWalletModal">
@@ -96,25 +96,25 @@ $pending_withdrawals = $pending_result['pending_count'] ?? 0;
     <div class="row mb-4">
         <div class="col-6 col-md-3 mb-3">
             <div class="glass-card p-3 text-center">
-                <h6 class="text-muted">Total Deposits</h6>
+                <h6 class="text-light">Total Deposits</h6>
                 <h4 class="text-success">₦<?= number_format($stats['total_deposits'] ?? 0, 2) ?></h4>
             </div>
         </div>
         <div class="col-6 col-md-3 mb-3">
             <div class="glass-card p-3 text-center">
-                <h6 class="text-muted">Total Withdrawals</h6>
+                <h6 class="text-light">Total Withdrawals</h6>
                 <h4 class="text-danger">₦<?= number_format(abs($stats['total_withdrawals'] ?? 0), 2) ?></h4>
             </div>
         </div>
         <div class="col-6 col-md-3 mb-3">
             <div class="glass-card p-3 text-center">
-                <h6 class="text-muted">Total Transactions</h6>
+                <h6 class="text-light">Total Transactions</h6>
                 <h4 class="text-info"><?= $stats['total_transactions'] ?? 0 ?></h4>
             </div>
         </div>
         <div class="col-6 col-md-3 mb-3">
             <div class="glass-card p-3 text-center">
-                <h6 class="text-muted">Pending Withdrawals</h6>
+                <h6 class="text-light">Pending Withdrawals</h6>
                 <h4 class="text-warning"><?= $pending_withdrawals ?></h4>
             </div>
         </div>
@@ -166,7 +166,7 @@ $pending_withdrawals = $pending_result['pending_count'] ?? 0;
                                         <div>
                                             <h6 class="mb-1"><?= htmlspecialchars($account['bank_name']) ?></h6>
                                             <p class="mb-1"><?= htmlspecialchars($account['account_number']) ?></p>
-                                            <small class="text-muted"><?= htmlspecialchars($account['account_name']) ?></small>
+                                            <small class="text-light"><?= htmlspecialchars($account['account_name']) ?></small>
                                         </div>
                                         <div>
                                             <?php if ($account['is_default']): ?>
@@ -223,12 +223,12 @@ $pending_withdrawals = $pending_result['pending_count'] ?? 0;
                                     <tr>
                                         <td>
                                             <small><?= date('M j, Y', strtotime($transaction['created_at'])) ?></small><br>
-                                            <small class="text-muted"><?= date('g:i A', strtotime($transaction['created_at'])) ?></small>
+                                            <small class="text-light"><?= date('g:i A', strtotime($transaction['created_at'])) ?></small>
                                         </td>
                                         <td>
                                             <div class="fw-bold"><?= htmlspecialchars($transaction['description']) ?></div>
                                             <?php if (!empty($transaction['metadata'])): ?>
-                                                <small class="text-muted"><?= htmlspecialchars($transaction['metadata']) ?></small>
+                                                <small class="text-light"><?= htmlspecialchars($transaction['metadata']) ?></small>
                                             <?php endif; ?>
                                         </td>
                                         <td>
@@ -238,7 +238,7 @@ $pending_withdrawals = $pending_result['pending_count'] ?? 0;
                                             <?= $amount_sign ?>₦<?= number_format(abs($transaction['amount']), 2) ?>
                                         </td>
                                         <td>
-                                            <small class="text-muted">₦<?= number_format($transaction['balance_after'] ?? 0, 2) ?></small>
+                                            <small class="text-light">₦<?= number_format($transaction['balance_after'] ?? 0, 2) ?></small>
                                         </td>
                                     </tr>
                                 <?php endwhile; ?>
@@ -248,7 +248,7 @@ $pending_withdrawals = $pending_result['pending_count'] ?? 0;
                 <?php else: ?>
                     <div class="text-center py-4">
                         <i class="fas fa-wallet fa-2x text-muted mb-2"></i>
-                        <p class="text-muted mb-0">No transactions yet. Fund your wallet to get started!</p>
+                        <p class="text-white-50 mb-0">No transactions yet. Fund your wallet to get started!</p>
                     </div>
                 <?php endif; ?>
             </div>

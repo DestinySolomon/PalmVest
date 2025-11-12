@@ -53,19 +53,19 @@ $stats = $stmt2->get_result()->fetch_assoc();
     <div class="row mb-4">
         <div class="col-6 col-md-4 mb-3">
             <div class="glass-card p-3 text-center">
-                <h6 class="text-muted">Total Transactions</h6>
+                <h6 class="text-light">Total Transactions</h6>
                 <h4 class="text-warning"><?= $stats['total_transactions'] ?? 0 ?></h4>
             </div>
         </div>
         <div class="col-6 col-md-4 mb-3">
             <div class="glass-card p-3 text-center">
-                <h6 class="text-muted">Total Income</h6>
+                <h6 class="text-light">Total Income</h6>
                 <h4 class="text-success">₦<?= number_format($stats['total_income'] ?? 0, 2) ?></h4>
             </div>
         </div>
         <div class="col-6 col-md-4 mb-3">
             <div class="glass-card p-3 text-center">
-                <h6 class="text-muted">Total Expenses</h6>
+                <h6 class="text-light">Total Expenses</h6>
                 <h4 class="text-danger">₦<?= number_format(abs($stats['total_expenses'] ?? 0), 2) ?></h4>
             </div>
         </div>
@@ -132,12 +132,12 @@ $stats = $stmt2->get_result()->fetch_assoc();
                                     <tr class="transaction-row">
                                         <td>
                                             <small><?= date('M j, Y', strtotime($transaction['created_at'])) ?></small><br>
-                                            <small class="text-muted"><?= date('g:i A', strtotime($transaction['created_at'])) ?></small>
+                                            <small class="text-light"><?= date('g:i A', strtotime($transaction['created_at'])) ?></small>
                                         </td>
                                         <td>
                                             <div class="fw-bold"><?= htmlspecialchars($transaction['description']) ?></div>
                                             <?php if (!empty($transaction['metadata'])): ?>
-                                                <small class="text-muted"><?= htmlspecialchars($transaction['metadata']) ?></small>
+                                                <small class="text-light"><?= htmlspecialchars($transaction['metadata']) ?></small>
                                             <?php endif; ?>
                                         </td>
                                         <td>
@@ -147,10 +147,10 @@ $stats = $stmt2->get_result()->fetch_assoc();
                                             <?= $amount_sign ?>₦<?= number_format(abs($transaction['amount']), 2) ?>
                                         </td>
                                         <td>
-                                            <small class="text-muted">₦<?= number_format($transaction['balance_after'] ?? 0, 2) ?></small>
+                                            <small class="text-light">₦<?= number_format($transaction['balance_after'] ?? 0, 2) ?></small>
                                         </td>
                                         <td>
-                                            <small class="text-muted">#<?= $transaction['id'] ?></small>
+                                            <small class="text-light">#<?= $transaction['id'] ?></small>
                                         </td>
                                     </tr>
                                 <?php endwhile; ?>
@@ -166,9 +166,9 @@ $stats = $stmt2->get_result()->fetch_assoc();
                     </div>
                 <?php else: ?>
                     <div class="text-center py-5">
-                        <i class="fas fa-receipt fa-3x text-muted mb-3"></i>
-                        <h5 class="text-muted">No Transactions Yet</h5>
-                        <p class="text-muted">Your transaction history will appear here.</p>
+                        <i class="fas fa-receipt fa-3x text-light mb-3"></i>
+                        <h5 class="text-white-50">No Transactions Yet</h5>
+                        <p class="text-white-50">Your transaction history will appear here.</p>
                         <a href="index.php?page=buy_oil" class="btn btn-warning">Make Your First Purchase</a>
                     </div>
                 <?php endif; ?>
@@ -185,13 +185,13 @@ $stats = $stmt2->get_result()->fetch_assoc();
                     <div class="col-6">
                         <div class="border-end border-secondary">
                             <h4 class="text-success">₦<?= number_format($stats['total_income'] ?? 0, 2) ?></h4>
-                            <small class="text-muted">Total Income</small>
+                            <small class="text-light">Total Income</small>
                         </div>
                     </div>
                     <div class="col-6">
                         <div>
                             <h4 class="text-danger">₦<?= number_format(abs($stats['total_expenses'] ?? 0), 2) ?></h4>
-                            <small class="text-muted">Total Expenses</small>
+                            <small class="text-light">Total Expenses</small>
                         </div>
                     </div>
                 </div>

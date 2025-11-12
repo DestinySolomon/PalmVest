@@ -34,7 +34,7 @@ $metrics = $metrics_result->fetch_assoc();
 $wallet_balance = get_wallet_balance($user_id);
 ?>
 
-<div class="container-fluid">
+<div class="container-fluid" >
     <!-- Portfolio Header -->
     <div class="row mb-4">
         <div class="col-12">
@@ -63,25 +63,25 @@ $wallet_balance = get_wallet_balance($user_id);
     <div class="row mb-4">
         <div class="col-6 col-md-3 mb-3">
             <div class="glass-card p-3 text-center">
-                <h6 class="text-muted">Total Investments</h6>
+                <h6 class="text-light">Total Investments</h6>
                 <h4 class="text-warning"><?= $metrics['total_investments'] ?? 0 ?></h4>
             </div>
         </div>
         <div class="col-6 col-md-3 mb-3">
             <div class="glass-card p-3 text-center">
-                <h6 class="text-muted">Oil Units</h6>
+                <h6 class="text-light">Oil Units</h6>
                 <h4 class="text-success"><?= number_format($metrics['total_units'] ?? 0) ?></h4>
             </div>
         </div>
         <div class="col-6 col-md-3 mb-3">
             <div class="glass-card p-3 text-center">
-                <h6 class="text-muted">Total Invested</h6>
+                <h6 class="text-light">Total Invested</h6>
                 <h4 class="text-info">₦<?= number_format($metrics['total_invested'] ?? 0) ?></h4>
             </div>
         </div>
         <div class="col-6 col-md-3 mb-3">
             <div class="glass-card p-3 text-center">
-                <h6 class="text-muted">Wallet Balance</h6>
+                <h6 class="text-light">Wallet Balance</h6>
                 <h4 class="text-primary">₦<?= number_format($wallet_balance) ?></h4>
             </div>
         </div>
@@ -160,9 +160,9 @@ $wallet_balance = get_wallet_balance($user_id);
                     </div>
                 <?php else: ?>
                     <div class="text-center py-5">
-                        <i class="fas fa-oil-can fa-3x text-muted mb-3"></i>
-                        <h5 class="text-muted">No Active Investments</h5>
-                        <p class="text-muted">You haven't made any oil purchases yet.</p>
+                        <i class="fas fa-oil-can fa-3x text-light mb-3"></i>
+                        <h5 class="text-white-50">No Active Investments</h5>
+                        <p class="text-white-50">You haven't made any oil purchases yet.</p>
                         <a href="index.php?page=buy_oil" class="btn btn-warning">Buy Palm Oil Now</a>
                     </div>
                 <?php endif; ?>
@@ -197,7 +197,7 @@ $wallet_balance = get_wallet_balance($user_id);
                 <div class="modal-body">
                     <p>Are you sure you want to harvest this oil investment?</p>
                     <p><strong>Quantity: <span id="harvestQuantity"></span> units</strong></p>
-                    <p class="text-muted small">The oil will be converted to cash and credited to your wallet.</p>
+                    <p class="text-light small">The oil will be converted to cash and credited to your wallet.</p>
                     
                     <input type="hidden" name="order_id" id="harvestOrderId">
                 </div>
