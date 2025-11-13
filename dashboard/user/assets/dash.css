@@ -9,7 +9,7 @@
 
 /* BODY */
 body.pv-body {
-  background: rgb(1, 1, 77);
+  background: rgb(0, 0, 20);
   color: white;
   margin: 0;
   font-family: Arial, sans-serif;
@@ -64,7 +64,7 @@ body.pv-body {
    ========================================================= */
 .pv-sidebar {
   width: 250px;
-  background: rgb(1, 41, 1);
+  background: rgb(0, 27, 0);
   position: fixed;
   top: 60px; /* ✅ BELOW TOPBAR */
   bottom: 0;
